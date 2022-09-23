@@ -27,7 +27,9 @@ mongoose.connect(process.env.MONGO_ID
 
 let PORT = process.env.PORT || 5000;
 
-
+app.get('/',(req,res)=>{
+	res.send(`<h1>Hello</h1>`)
+})
 
 const server = app.listen(PORT,()=>{
 	console.log(`Server Started on ${PORT} `);
