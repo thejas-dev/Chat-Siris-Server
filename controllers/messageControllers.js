@@ -30,6 +30,7 @@ module.exports.getMessage = async(req,res,next)=>{
 			return{
 				fromSelf:message.sender.toString() === from,
 				message:message.message.text,
+				updatedAt:message.updatedAt
 			}
 		})
 		res.json(projectedMessages);

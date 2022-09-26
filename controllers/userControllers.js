@@ -45,13 +45,14 @@ module.exports.setAvatar = async(req,res,next)=>{
 
 module.exports.getAllUsers = async(req,res,next)=>{
 	try{
-		const {data} = User.find( { _id:{$eq:req.params.recentChats} } ,(err,data)=>{return res.json(data)}).select([
+		const data = User.find( { _id:{$eq:req.params.recentChats} } ,(err,data)=>{
+			return res.json(data)
+		}).select([
 			"email",
 			"username",
 			"avatarImage",
 			"_id",
 		]);
-		
 	}catch(ex){
 		next(ex);
 	}
@@ -82,10 +83,12 @@ module.exports.setRecentChat = async(req,res,next)=>{
 		const {chatId} = req.body;
 		const userData = User.findByIdAndUpdate(userId,{
 			recentChats:chatId
-		},(err,obj)=>{
-			return res.json(obj)
+		},{new:true},(err,docs)=>{
+			console.log(docs)
+			return res.json(docs)
+
 		})
- 
+ 		console.log(userData)
 	}catch(ex){
 		next(ex)
 	}
